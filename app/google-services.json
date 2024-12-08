@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "322625106912",
+    "project_id": "siglat-f0bc9",
+    "storage_bucket": "siglat-f0bc9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322625106912:android:bae03b7e389379e602b185",
+        "android_client_info": {
+          "package_name": "com.example.baguiosiglat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzNNbIExwUhryokRtOYypAXLb2b0v-JGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment_profile"
+    android:background="@color/white">
+
+    <!-- Profile Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:weightSum="1">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:cardCornerRadius="100dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/channels4_profile"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp"/>
+
+        <!-- Main Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0.1">
+
+            <!-- Personal Information -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_black"
+                android:text="@string/profile_header"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:divider="@drawable/divider"
+                android:showDividers="middle"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="16sp"
+                    android:layout_weight="0.2"/>
+
+
+                <TextView
+                    android:id="@+id/email_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email_address"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="16sp"
+                    android:layout_weight="0.2"/>
+
+
+                <TextView
+                    android:id="@+id/phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phone_number"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="16sp"
+                    android:layout_weight="0.2"/>
+
+            </LinearLayout>
+
+            <!-- End of Personal Info -->
+
+            <TextView
+                android:id="@+id/log_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:textColor="#707070"
+                android:fontFamily="@font/inter_medium"
+                android:textSize="13sp"
+                android:layout_gravity="start" />
+        </LinearLayout>
+
+
+        <!-- End Main Container -->
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

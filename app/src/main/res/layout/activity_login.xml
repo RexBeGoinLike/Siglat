@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login"
+    android:background="#B82727">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.8">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/logo_of_siglat"
+            android:src="@drawable/siglat_logo" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="150dp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_field"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_container"
+            android:hint="@string/email"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:textColor="#F5F5F5"
+            android:textColorHint="#F5F5F5"
+            android:textSize="11sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_field"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_container"
+            android:hint="@string/password"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:textColor="#F5F5F5"
+            android:textColorHint="#F5F5F5"
+            android:textSize="11sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/register_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:layout_gravity="start"
+            android:textColor="#F5F5F5"
+            android:textSize="11sp"
+            android:layout_marginStart="7dp"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <ImageButton
+            android:id="@+id/login_btn"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:contentDescription="@string/login_button"
+            android:background="@drawable/login" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
