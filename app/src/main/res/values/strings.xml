@@ -8,7 +8,7 @@
     <string name="see_more"><u>See more</u></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="sigma_meal_nskibdi_slicers">Sigma Meal!\nSkibdi Slicers</string>
+    <string name="sigma_meal_nskibdi_slicers">WATCH | Special #KapihanSaBaguio on the 70th Annual National Mine Safety and Environment Conference led by Philippine Mine Safety and Environment Association (PMSEA).</string>
     <string name="header">Department of Fent Reactor</string>
     <string name="fent_reactor_online">Fent Reactor Online</string>
     <string name="logo_of_siglat">Logo of Siglat</string>
@@ -29,4 +29,7 @@
     <string name="don_t_have_an_account"><u>Don\'t have an account?</u></string>
     <string name="phone_number_register">Phone Number</string>
     <string name="profile_picture">Profile Picture</string>
+    <string name="george_droid_online">GEORGE DROID ONLINE</string>
+    <string name="volunteer_btn"><u>Volunteer</u></string>
+    <string name="event_title">Event Title</string>
 </resources>

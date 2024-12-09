@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="300dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/link_to_website"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent="0.95"
         android:layout_height="wrap_content"
@@ -19,47 +18,49 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="15dp">
 
-            <TextView
-                android:id="@+id/department_header"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/header"
-                android:textSize="12sp"
-                android:fontFamily="@font/inter_semi_bold"/>
+                android:layout_height="180dp"
+                app:cardCornerRadius="15dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/channels4_profile" />
 
-            <LinearLayout
-                android:layout_marginTop="5dp"
+            </androidx.cardview.widget.CardView>
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:id="@+id/logo_department"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:src="@drawable/perell"/>
-
-                <Space
-                    android:layout_width="20dp"
-                    android:layout_height="match_parent"/>
+                android:layout_marginTop="10dp">
+                
                 <TextView
-                    android:id="@+id/department_description"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/event_title"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/george_droid_online"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="#B82727"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/volunteer_bg"
+                    android:textColor="@color/white"
                     android:textSize="11sp"
-                    android:minHeight="75dp"
-                    android:maxHeight="75dp"
-                    android:text="@string/fent_reactor_online"/>
-            </LinearLayout>
+                    android:text="@string/volunteer_btn"/>
+
+
+            </FrameLayout>
+            
         </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

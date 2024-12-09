@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment_event_creator">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="15dp"
+        android:scrollbarThumbVertical="@null">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Image Banner Upload -->
+
+            <!-- Event Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Title"
+                android:fontFamily="@font/inter_black"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/event_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_medium"
+                android:background="@drawable/event_input_bg"
+                android:textCursorDrawable="@null"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+            <!-- Event Date -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Date"
+                android:fontFamily="@font/inter_black"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/event_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_medium"
+                android:background="@drawable/event_input_bg"
+                android:textCursorDrawable="@null"
+                android:inputType="date"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <!-- Event Time -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Time"
+                android:fontFamily="@font/inter_black"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/event_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_medium"
+                android:background="@drawable/event_input_bg"
+                android:textCursorDrawable="@null"
+                android:inputType="time"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <!-- Event Location -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Location"
+                android:fontFamily="@font/inter_black"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/event_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_medium"
+                android:background="@drawable/event_input_bg"
+                android:textCursorDrawable="@null"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <!-- Event Description -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Description"
+                android:fontFamily="@font/inter_black"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/event_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_medium"
+                android:background="@drawable/event_input_bg"
+                android:textCursorDrawable="@null"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <!-- Contact Person Name -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Person Name"
+                android:fontFamily="@font/inter_black"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contact_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_medium"
+                android:background="@drawable/event_input_bg"
+                android:textCursorDrawable="@null"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <!-- Contact Person Phone -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Person Number"
+                android:fontFamily="@font/inter_black"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contact_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_medium"
+                android:background="@drawable/event_input_bg"
+                android:textCursorDrawable="@null"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+            <!-- Contact Person Email -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Person Email"
+                android:fontFamily="@font/inter_black"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contact_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="48dp"
+                android:padding="15dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_medium"
+                android:background="@drawable/event_input_bg"
+                android:textCursorDrawable="@null"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <!-- Create an Event -->
+            <Button
+                android:id="@+id/create_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/volunteer_bg"
+                android:text="Create Event"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="25dp"/>
+        </LinearLayout>
+        <!-- Text Box Layout -->
+
+
+        
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

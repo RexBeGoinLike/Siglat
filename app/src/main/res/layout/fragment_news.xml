@@ -35,8 +35,9 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.1"
             />
+
         <!-- Live News Container -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,8 +57,8 @@
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:contentDescription="LiveIcon"
                     android:src="@drawable/live" />
 
@@ -67,8 +68,8 @@
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/inter_extra_bold"
                     android:text="LIVE"
-                    android:textColor="#EE1A1A"
-                    android:textSize="15sp" />
+                    android:textColor="#B82727"
+                    android:textSize="10sp" />
 
             </LinearLayout>
 
@@ -79,7 +80,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/inter_medium"
                 android:text="@string/sigma_meal_nskibdi_slicers"
-                android:textSize="13sp" />
+                android:textSize="10sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,15 +88,16 @@
                 android:fontFamily="@font/inter_semi_bold"
                 android:gravity="end"
                 android:text="@string/see_more"
-                android:textColor="#EE1A1A"
-                android:textSize="13sp" />
+                android:textColor="#B82727"
+                android:textSize="10sp" />
 
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"/>
+            android:layout_weight="0.2"/>
+
         <!-- Youtube Shorts Looking Ahh -->
         <LinearLayout
             android:layout_width="match_parent"

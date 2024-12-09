@@ -2,48 +2,51 @@ package com.example.baguiosiglat;
 
 public class GovernmentDepartment {
     private String name;
-    private String image;
+    private String logoLink;
     private String description;
 
-    private String link;
-
+    private String siteLink;
 
     public GovernmentDepartment(String name, String image, String description, String link) {
         this.name = name;
-        this.image = image;
+        this.logoLink = image;
         this.description = description;
-        this.link = link;
+        this.siteLink = link;
+    }
+
+    public GovernmentDepartment(){
+
     }
 
     public String getName() {
         return name;
     }
 
-    public String getImage() {
-        return image;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLogoLink() {
+        return logoLink;
+    }
+
+    public void setLogoLink(String logoLink) {
+        this.logoLink = logoLink;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public String getSiteLink() {
+        return siteLink;
+    }
+
+    public void setSiteLink(String siteLink) {
+        this.siteLink = siteLink;
     }
 }

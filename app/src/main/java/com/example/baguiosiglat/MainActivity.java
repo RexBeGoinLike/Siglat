@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment news = new fragment_news();
         Fragment services = new fragment_services();
+        Fragment volunteer = new fragment_volunteer();
         Fragment profile = new fragment_profile();
 
         ;
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.page_2:
                     fragment = services;
+                    break;
+                case R.id.page_3:
+                    fragment = volunteer;
                     break;
                 case R.id.page_4:
                     fragment = profile;

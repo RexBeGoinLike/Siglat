@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.squareup.picasso)
     implementation(libs.browser)
     implementation(libs.circleimageview)
     implementation(libs.appcompat)
