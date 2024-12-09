@@ -20,9 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.8">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -32,7 +29,7 @@
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="150dp" />
+            android:layout_height="100dp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name_register"
@@ -44,6 +41,23 @@
             android:padding="10dp"
             android:textColor="#F5F5F5"
             android:textColorHint="#F5F5F5"
+            android:textCursorDrawable="@null"
+            android:textSize="11sp" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_number_register"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_container"
+            android:hint="@string/phone_number_register"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:textColor="#F5F5F5"
+            android:textColorHint="#F5F5F5"
+            android:textCursorDrawable="@null"
             android:textSize="11sp" />
         <Space
             android:layout_width="wrap_content"
@@ -59,6 +73,7 @@
             android:padding="10dp"
             android:textColor="#F5F5F5"
             android:textColorHint="#F5F5F5"
+            android:textCursorDrawable="@null"
             android:textSize="11sp" />
 
         <Space
@@ -75,7 +90,9 @@
             android:padding="10dp"
             android:textColor="#F5F5F5"
             android:textColorHint="#F5F5F5"
-            android:textSize="11sp" />
+            android:textCursorDrawable="@null"
+            android:textSize="11sp"
+            android:inputType="textPassword" />
 
         <Space
             android:layout_width="match_parent"

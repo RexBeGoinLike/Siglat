@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
@@ -69,10 +70,22 @@ public class fragment_profile extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         TextView logout = view.findViewById(R.id.log_out);
+        TextView name = view.findViewById(R.id.user_name);
+        TextView number = view.findViewById(R.id.phone_number);
         TextView email = view.findViewById(R.id.email_address);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         email.setText(user.getEmail());
+        name.setText(user.getDisplayName());
+        db.collection("users").document(user.getUid()).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if(documentSnapshot.exists()){
+                        number.setText(documentSnapshot.getString("Phone"));
+                    }
+                });
+
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
