@@ -54,23 +54,29 @@ public class Register extends AppCompatActivity {
 
         ImageButton regBtn = findViewById(R.id.register_acc);
 
-        String name = String.valueOf(nameField.getText());
-        String email = String.valueOf(emailField.getText());
-        String password = String.valueOf(passField.getText());
 
 
         returnToLogin.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Login.class)));
 
-        regBtn.setOnClickListener(v -> mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        startActivity(new Intent(getApplicationContext(), Login.class));
-                        finish();
-                    } else {
-                        Toast.makeText(Register.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }));
 
+        regBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = String.valueOf(nameField.getText());
+                String email = String.valueOf(emailField.getText());
+                String password = String.valueOf(passField.getText());
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                startActivity(new Intent(getApplicationContext(), Login.class));
+                                finish();
+                            } else {
+                                Toast.makeText(Register.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+
+        });
     }
 }

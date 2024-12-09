@@ -26,4 +26,5 @@
     <string name="register"><u>Register</u></string>
     <string name="register_desc">Register</string>
     <string name="logout">Logout</string>
+    <string name="don_t_have_an_account"><u>Don\'t have an account?</u></string>
 </resources>

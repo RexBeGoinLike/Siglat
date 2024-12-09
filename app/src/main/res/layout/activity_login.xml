@@ -66,17 +66,6 @@
             android:layout_width="match_parent"
             android:layout_height="5dp" />
 
-        <TextView
-            android:id="@+id/register_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register"
-            android:layout_gravity="start"
-            android:textColor="#F5F5F5"
-            android:textSize="11sp"
-            android:layout_marginStart="7dp"
-            />
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="50dp" />
@@ -87,6 +76,19 @@
             android:layout_height="75dp"
             android:contentDescription="@string/login_button"
             android:background="@drawable/login" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:id="@+id/register_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/don_t_have_an_account"
+            android:textColor="#F5F5F5"
+            android:fontFamily="@font/inter_variable"
+            android:textSize="11sp"/>
     </LinearLayout>
 
 
