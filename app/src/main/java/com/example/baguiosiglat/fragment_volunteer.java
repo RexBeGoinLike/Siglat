@@ -95,7 +95,9 @@ public class fragment_volunteer extends Fragment {
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).replaceFragment(new fragment_event_creator());
+                getActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).addToBackStack(null)
+                        .setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
+                        .replace(R.id.fragment_container, new fragment_event_creator()).commit();
             }
         });
 

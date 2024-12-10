@@ -73,25 +73,30 @@ public class Register extends AppCompatActivity {
                 userData.put("Name", name);
                 userData.put("Phone", phoneNumber);
 
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
 
-                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                UserProfileChangeRequest profileChange = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(name).build();
-                                user.updateProfile(profileChange);
+                try {
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
 
-                                db.collection("users").document(user.getUid()).set(userData);
-                                startActivity(new Intent(getApplicationContext(), Login.class));
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    UserProfileChangeRequest profileChange = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(name).build();
+                                    user.updateProfile(profileChange);
 
-                            } else {
-                                Toast.makeText(Register.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                                    db.collection("users").document(user.getUid()).set(userData);
+                                    startActivity(new Intent(getApplicationContext(), Login.class));
+
+                                } else {
+                                    Toast.makeText(Register.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }catch (Exception e){
+                    Toast.makeText(Register.this, "Do not leave empty fields.",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
-
         });
     }
 }

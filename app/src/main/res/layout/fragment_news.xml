@@ -6,43 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment_news"
+    android:layout_marginTop="500dp"
     android:background="@color/white">
+
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:weightSum="1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.8"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.241"
-        app:layout_constraintWidth_percent="0.9">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical">
 
-        <!-- Carousel Place Holder -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@drawable/news_background"
-            android:layout_weight="0.1"
-            />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            />
-
-        <!-- Live News Container -->
         <LinearLayout
+            android:id="@+id/live"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/live_news_container"
+            android:gravity="center"
             android:orientation="vertical"
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
@@ -51,26 +34,28 @@
 
             <!-- Live Header -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="start"
                 android:orientation="horizontal"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:contentDescription="LiveIcon"
-                    android:src="@drawable/live" />
+                    android:src="@drawable/live"
+                    tools:ignore="ImageContrastCheck" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/inter_extra_bold"
-                    android:text="LIVE"
+                    android:text="Live"
                     android:textColor="#B82727"
-                    android:textSize="10sp" />
-
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
             </LinearLayout>
 
             <!-- Text Description -->
@@ -80,7 +65,8 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/inter_medium"
                 android:text="@string/sigma_meal_nskibdi_slicers"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -89,72 +75,42 @@
                 android:gravity="end"
                 android:text="@string/see_more"
                 android:textColor="#B82727"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
+
 
         </LinearLayout>
 
         <Space
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"/>
+
+        <!-- WebView at the Bottom -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"/>
+            android:layout_height="175dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <!-- Youtube Shorts Looking Ahh -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="1"
-            android:layout_weight="0.2">
+            <WebView
+                android:id="@+id/newsView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.33"
-                app:cardCornerRadius="10dp">
+            <FrameLayout
+                android:id="@+id/fullscreenContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:background="#000"/>
 
-                <VideoView
-                    android:id="@+id/video1"
-                    android:layout_width="match_parent"
-                    android:layout_height="175dp">
-
-                </VideoView>
-            </androidx.cardview.widget.CardView>
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="match_parent" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.33"
-                app:cardCornerRadius="10dp">
-
-                <VideoView
-                    android:id="@+id/video2"
-                    android:layout_width="match_parent"
-                    android:layout_height="175dp" />
-            </androidx.cardview.widget.CardView>
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="match_parent" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.33"
-                app:cardCornerRadius="10dp">
-
-                <VideoView
-                    android:id="@+id/video3"
-                    android:layout_width="match_parent"
-                    android:layout_height="175dp" />
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

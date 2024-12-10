@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +16,14 @@ import android.widget.TextView;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +84,7 @@ public class fragment_profile extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        //Read data of user
         email.setText(user.getEmail());
         name.setText(user.getDisplayName());
         db.collection("users").document(user.getUid()).get()
@@ -85,8 +94,55 @@ public class fragment_profile extends Fragment {
                     }
                 });
 
+        ArrayList<PostData> posts = new ArrayList<>();
 
+        //Filter through owned posts
+        db.collection("posts").get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for(DocumentSnapshot snapshot : queryDocumentSnapshots){
+                if(snapshot.exists()){
+                    if(snapshot.getString("owner").equals(user.getUid())){
+                        PostData post = snapshot.toObject(PostData.class);
+                        posts.add(post);
+                    }
+                }
 
+                RecyclerView postPreview = view.findViewById(R.id.organized_events_view);
+                VolunteerPreviewAdapter adapter = new VolunteerPreviewAdapter(posts, getActivity(), getParentFragmentManager());
+                postPreview.setAdapter(adapter);
+                postPreview.setLayoutManager(new LinearLayoutManager(getContext()));
+            }
+        });
+
+        ArrayList<PostData> joinedPosts = new ArrayList<>();
+        //Filter through owned posts
+
+        db.collection("users").document(user.getUid()).collection("joined_events")
+                .get().addOnSuccessListener(queryDocumentSnapshots -> {
+
+                    for (DocumentSnapshot snapshot : queryDocumentSnapshots){
+                        db.collection("posts").get().addOnSuccessListener(queryDocumentSnapshot1 -> {
+
+                            for (DocumentSnapshot postData : queryDocumentSnapshot1){
+                                if(postData.getId().equals(snapshot.getId())){
+
+                                    PostData post = postData.toObject(PostData.class);
+                                    joinedPosts.add(post);
+
+                                }
+
+                            }
+
+                            RecyclerView postPreview = view.findViewById(R.id.joined_events_view);
+                            VolunteerPreviewAdapter adapter = new VolunteerPreviewAdapter(joinedPosts, getActivity(), getParentFragmentManager());
+                            postPreview.setAdapter(adapter);
+                            postPreview.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                        });
+                    }
+
+                });
+
+        //Logout account
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

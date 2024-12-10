@@ -11,16 +11,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.sql.Time;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,7 +76,6 @@ public class fragment_event_creator extends Fragment {
         AppCompatButton createEvent;
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         eventTitle = view.findViewById(R.id.event_title);
         eventDate = view.findViewById(R.id.event_date);
@@ -92,11 +87,23 @@ public class fragment_event_creator extends Fragment {
         contactEmail = view.findViewById(R.id.contact_email);
         createEvent = view.findViewById(R.id.create_event);
 
+        if(getArguments() != null){
+            eventTitle.setText(getArguments().getString("title"));
+            eventDate.setText(getArguments().getString("date"));
+            eventTime.setText(getArguments().getString("time"));
+            eventLocation.setText(getArguments().getString("location"));
+            eventDesc.setText(getArguments().getString("description"));
+            contactName.setText(getArguments().getString("contactName"));
+            contactNum.setText(getArguments().getString("contactNumber"));
+            contactEmail.setText(getArguments().getString("contactEmail"));
+            createEvent.setText("Edit");
+        }
+
         //Date and time picker dialogues
         eventDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
+                Calendar c = Calendar.getInstance();
 
                 int year = c.get(Calendar.YEAR);
                 int month = c.get(Calendar.MONTH);
@@ -104,21 +111,15 @@ public class fragment_event_creator extends Fragment {
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         getActivity(), (view1, year1, monthOfYear, dayOfMonth) -> eventDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year1), year, month, day);
+
+                c.set(year, month, day);
+                datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
+
+
+                c.add(Calendar.YEAR, 1);
+                datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
+
                 datePickerDialog.show();
-            }
-        });
-
-        eventTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
-
-                TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(getActivity(), (timePicker, selectedHour, selectedMinute) -> eventTime.setText(selectedHour + ":" + selectedMinute), hour, minute, true);
-                mTimePicker.show();
             }
         });
 
@@ -128,6 +129,8 @@ public class fragment_event_creator extends Fragment {
             public void onClick(View v) {
 
                 String title, date, time, location, desc, name, num, email;
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                 title = String.valueOf(eventTitle.getText());
                 date = String.valueOf(eventDate.getText());
@@ -140,14 +143,29 @@ public class fragment_event_creator extends Fragment {
 
                 if(!title.isEmpty() && !date.isEmpty() && !time.isEmpty()
                         && !location.isEmpty() && !desc.isEmpty()
-                        & !name.isEmpty() && !num.isEmpty() && !email.isEmpty()){
-                    PostData post = new PostData(title, date, time, location, desc, name, num, email, user.getUid());
+                        && !name.isEmpty() && !num.isEmpty() && !email.isEmpty()){
 
-                    db.collection("posts").document().set(post);
+                    PostData post = new PostData("", title, date, time, location, desc, name, num, email, user.getUid());
 
-                    ((MainActivity) getActivity()).replaceFragment(new fragment_volunteer());
+                    if(getArguments() != null){
+                        post.setPostID(getArguments().getString("postID"));
+                        db.collection("posts").document(getArguments().getString("postID")).set(post);
+                    }else {
+                        db.collection("posts").add(post).addOnSuccessListener(documentReference -> {
+                            String id = documentReference.getId();
+                            post.setPostID(id);
+                            documentReference.update("postID", id);
+                        });
+                    }
 
+                    getActivity().getSupportFragmentManager().popBackStack();
+
+                }else {
+                    Toast.makeText(getActivity(), "Do not leave empty fields.",
+                            Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
 

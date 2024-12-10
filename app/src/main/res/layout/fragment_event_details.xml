@@ -11,81 +11,118 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:scrollbarThumbVertical="@null"
-        android:scrollbarThumbHorizontal="@null"
         android:background="@drawable/details_bg"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:scrollbarThumbHorizontal="@null"
+        android:scrollbarThumbVertical="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            
+
             <!-- Header -->
-            <TextView
-                android:id="@+id/event_header"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/fentgpt"
-                android:fontFamily="@font/inter_extra_bold"
-                android:textSize="22sp"/>
+                android:orientation="horizontal"
+                android:weightSum="1">
 
+                <TextView
+                    android:id="@+id/event_header"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_extra_bold"
+                    android:text="@string/fentgpt"
+                    android:textSize="20sp"
+                    android:layout_weight="0.95"/>
+
+                <ImageButton
+                    android:id="@+id/edit_post_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit"
+                    android:visibility="gone"
+                    android:layout_gravity="end|center_vertical"/>
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"/>
+                <ImageButton
+                    android:id="@+id/delete_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/delete"
+                    android:visibility="gone"
+                    android:layout_gravity="end|center_vertical"/>
+
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/event_location_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
                 android:text="@string/fentnet_research_plant"
-                android:fontFamily="@font/inter_bold"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/event_contact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/george_droid_09053195976_droid_gmail_com"
-                android:fontFamily="@font/inter_bold"
-                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/event_datetime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/_05_20_2020_10_58"
                 android:fontFamily="@font/inter_bold"
-                android:textSize="14sp"/>
+                android:text="@string/_05_20_2020_10_58"
+                android:textSize="14sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="25dp"/>
+                android:layout_height="15dp" />
+
+            <TextView
+                android:id="@+id/event_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="name"
+                android:textSize="14sp" />
+
 
             <!-- Description -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/sign_up_event_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/volunteer_bg"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
                 android:fontFamily="@font/inter_regular"
                 android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
                 android:textSize="11sp" />
 
-            <Space
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="15dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="Event Description:"
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/event_description_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/george_droid_online_text"
                 android:fontFamily="@font/inter_regular"
-                android:textSize="13sp"/>
+                android:text="@string/george_droid_online_text"
+                android:textSize="13sp" />
 
         </LinearLayout>
 

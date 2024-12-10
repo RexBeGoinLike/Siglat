@@ -11,12 +11,14 @@ public class PostData {
     private String contactEmail;
 
     private String owner;
+    private String postID;
 
     public PostData(){
 
     }
 
-    public PostData(String title, String date, String time, String location, String description, String contactName, String contactNumber, String contactEmail, String owner) {
+    public PostData(String postID, String title, String date, String time, String location, String description, String contactName, String contactNumber, String contactEmail, String owner) {
+        this.postID = postID;
         this.title = title;
         this.date = date;
         this.time = time;
@@ -27,6 +29,15 @@ public class PostData {
         this.contactEmail = contactEmail;
         this.owner = owner;
     }
+
+    public String getPostID() {
+        return postID;
+    }
+
+    public void setPostID(String postID) {
+        this.postID = postID;
+    }
+
 
     public String getTitle() {
         return title;

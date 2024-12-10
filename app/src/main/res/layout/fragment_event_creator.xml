@@ -95,14 +95,10 @@
                 android:minHeight="48dp"
                 android:padding="15dp"
                 android:textSize="14sp"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
                 android:fontFamily="@font/inter_medium"
                 android:background="@drawable/event_input_bg"
                 android:textCursorDrawable="@null"
-                android:inputType="none"/>
+                android:inputType="time"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -153,6 +149,7 @@
                 android:fontFamily="@font/inter_medium"
                 android:background="@drawable/event_input_bg"
                 android:minLines="5"
+                android:gravity="top"
                 android:textCursorDrawable="@null"/>
 
             <Space

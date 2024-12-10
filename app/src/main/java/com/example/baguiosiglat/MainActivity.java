@@ -10,8 +10,6 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.Firebase;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,10 +29,11 @@ public class MainActivity extends AppCompatActivity {
         Fragment services = new fragment_services();
         Fragment volunteer = new fragment_volunteer();
         Fragment profile = new fragment_profile();
+        Fragment emergency = new fragment_emergency();
 
         ;
         //Load default fragment
-        loadFragment(news);
+        loadFragment(emergency);
 
         //Bottom Navigation
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -50,9 +49,12 @@ public class MainActivity extends AppCompatActivity {
                     fragment = services;
                     break;
                 case R.id.page_3:
-                    fragment = volunteer;
+                    fragment = emergency;
                     break;
                 case R.id.page_4:
+                    fragment = volunteer;
+                    break;
+                case R.id.page_5:
                     fragment = profile;
                     break;
                 default:

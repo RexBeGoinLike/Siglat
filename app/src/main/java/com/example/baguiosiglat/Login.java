@@ -53,15 +53,21 @@ public class Login extends AppCompatActivity {
             String email = String.valueOf(emailField.getText());
             String password = String.valueOf(passwordField.getText());
 
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(Login.this, task -> {
-                        if (task.isSuccessful()) {
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            finish();
-                        } else {
-                            Toast.makeText(Login.this, "Sign in failed", Toast.LENGTH_LONG).show();
-                        }
-                    });
+            try {
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(Login.this, task -> {
+                            if (task.isSuccessful()) {
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                finish();
+                            } else {
+                                Toast.makeText(Login.this, "Sign in failed", Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }catch (Exception e){
+                Toast.makeText(Login.this, "Do not leave empty fields.",
+                        Toast.LENGTH_SHORT).show();
+            }
+
         });
     }
 
