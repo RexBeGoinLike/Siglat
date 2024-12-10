@@ -15,17 +15,44 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="15dp"
+        android:background="@color/white">
 
-        <ImageButton
-            android:id="@+id/create_event_btn"
+        <Space
             android:layout_width="wrap_content"
+            android:layout_height="100dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            app:cardCornerRadius="100dp"
+            android:layout_gravity="center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/default_profile"
+            android:contentDescription="@string/profile_picture"/>
+        </androidx.cardview.widget.CardView>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/create_event_btn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/create_event"
-            android:layout_gravity="center"/>
+            android:text="@string/organize_an_event"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:background="@drawable/volunteer_bg"
+            android:layout_gravity="center"
+            android:textAllCaps="false"/>
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="25dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/volunteer_view"

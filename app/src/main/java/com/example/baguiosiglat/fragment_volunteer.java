@@ -2,6 +2,7 @@ package com.example.baguiosiglat;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,7 +70,7 @@ public class fragment_volunteer extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_volunteer, container, false);
-        ImageButton createEvent = view.findViewById(R.id.create_event_btn);
+        AppCompatButton createEvent = view.findViewById(R.id.create_event_btn);
 
         ArrayList<PostData> posts = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -82,7 +83,7 @@ public class fragment_volunteer extends Fragment {
                     posts.add(post);
 
                     RecyclerView postPreview = view.findViewById(R.id.volunteer_view);
-                    VolunteerPreviewAdapter adapter = new VolunteerPreviewAdapter(posts, getActivity());
+                    VolunteerPreviewAdapter adapter = new VolunteerPreviewAdapter(posts, getActivity(), getParentFragmentManager());
                     postPreview.setAdapter(adapter);
                     postPreview.setLayoutManager(new LinearLayoutManager(getContext()));
                 }

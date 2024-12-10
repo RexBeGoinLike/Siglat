@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Event Date"
-                android:fontFamily="@font/inter_black"
+                android:fontFamily="@font/inter_bold"
                 android:textSize="17sp"
                 android:textColor="@color/black"
                 />
@@ -67,8 +67,12 @@
                 android:textSize="14sp"
                 android:fontFamily="@font/inter_medium"
                 android:background="@drawable/event_input_bg"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:textCursorDrawable="@null"
-                android:inputType="date"/>
+                android:inputType="none"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -79,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Event Time"
-                android:fontFamily="@font/inter_black"
+                android:fontFamily="@font/inter_bold"
                 android:textSize="17sp"
                 android:textColor="@color/black"
                 />
@@ -91,10 +95,14 @@
                 android:minHeight="48dp"
                 android:padding="15dp"
                 android:textSize="14sp"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:fontFamily="@font/inter_medium"
                 android:background="@drawable/event_input_bg"
                 android:textCursorDrawable="@null"
-                android:inputType="time"/>
+                android:inputType="none"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -105,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Event Location"
-                android:fontFamily="@font/inter_black"
+                android:fontFamily="@font/inter_bold"
                 android:textSize="17sp"
                 android:textColor="@color/black"
                 />
@@ -130,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Event Description"
-                android:fontFamily="@font/inter_black"
+                android:fontFamily="@font/inter_bold"
                 android:textSize="17sp"
                 android:textColor="@color/black"
                 />
@@ -144,18 +152,19 @@
                 android:textSize="14sp"
                 android:fontFamily="@font/inter_medium"
                 android:background="@drawable/event_input_bg"
+                android:minLines="5"
                 android:textCursorDrawable="@null"/>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+                android:layout_height="50dp"/>
 
             <!-- Contact Person Name -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contact Person Name"
-                android:fontFamily="@font/inter_black"
+                android:fontFamily="@font/inter_bold"
                 android:textSize="17sp"
                 android:textColor="@color/black"
                 />
@@ -180,7 +189,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contact Person Number"
-                android:fontFamily="@font/inter_black"
+                android:fontFamily="@font/inter_bold"
                 android:textSize="17sp"
                 android:textColor="@color/black"
                 />
@@ -204,7 +213,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contact Person Email"
-                android:fontFamily="@font/inter_black"
+                android:fontFamily="@font/inter_bold"
                 android:textSize="17sp"
                 android:textColor="@color/black"
                 />
@@ -225,14 +234,16 @@
                 android:layout_height="10dp"/>
 
             <!-- Create an Event -->
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/create_event"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/volunteer_bg"
                 android:text="Create Event"
-                android:fontFamily="@font/inter_bold"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:fontFamily="@font/inter_regular"
                 android:layout_marginTop="25dp"/>
         </LinearLayout>
         <!-- Text Box Layout -->

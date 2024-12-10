@@ -1,18 +1,26 @@
 package com.example.baguiosiglat;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.sql.Time;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,7 +77,7 @@ public class fragment_event_creator extends Fragment {
 
         TextInputEditText eventTitle, eventDate, eventTime, eventLocation, eventDesc, contactName, contactNum, contactEmail;
 
-        Button createEvent;
+        AppCompatButton createEvent;
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -83,6 +91,37 @@ public class fragment_event_creator extends Fragment {
         contactNum = view.findViewById(R.id.contact_number);
         contactEmail = view.findViewById(R.id.contact_email);
         createEvent = view.findViewById(R.id.create_event);
+
+        //Date and time picker dialogues
+        eventDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        getActivity(), (view1, year1, monthOfYear, dayOfMonth) -> eventDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year1), year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
+        eventTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), (timePicker, selectedHour, selectedMinute) -> eventTime.setText(selectedHour + ":" + selectedMinute), hour, minute, true);
+                mTimePicker.show();
+            }
+        });
+
 
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override

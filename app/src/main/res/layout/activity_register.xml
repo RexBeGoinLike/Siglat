@@ -33,7 +33,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name_register"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_container"
             android:hint="@string/full_name"
@@ -49,7 +49,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone_number_register"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_container"
             android:hint="@string/phone_number_register"
@@ -65,7 +65,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_register"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_container"
             android:hint="@string/email"
@@ -82,7 +82,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_register"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_container"
             android:hint="@string/password"
