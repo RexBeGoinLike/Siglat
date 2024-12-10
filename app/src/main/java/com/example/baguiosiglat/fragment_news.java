@@ -45,25 +45,6 @@ public class fragment_news extends Fragment {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
-
-        ArrayList<GovernmentDepartment> services;services = new ArrayList<>();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        //Populate array with the data for each government office
-        db.collection("services").get().addOnSuccessListener(queryDocumentSnapshots -> {
-            for(DocumentSnapshot snapshot : queryDocumentSnapshots){
-                if(snapshot.exists()){
-                    GovernmentDepartment service = snapshot.toObject(GovernmentDepartment.class);
-                    services.add(service);
-                    RecyclerView servicesView = view.findViewById(R.id.services_view);
-                    ServicesAdapter adapter = new ServicesAdapter(getActivity(), services);
-                    servicesView.setAdapter(adapter);
-                    servicesView.setLayoutManager(new LinearLayoutManager(getContext()));
-                }
-            }
-        }).addOnFailureListener(e -> {
-            Log.w("Error", "Document does not exist");
-        });
-
         facebookWebView.setWebViewClient(new WebViewClient());
         facebookWebView.setWebChromeClient(new WebChromeClient() {
             @Override

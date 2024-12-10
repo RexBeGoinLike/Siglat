@@ -13,6 +13,7 @@ googleGmsGoogleServices = "4.4.2"
 firebaseFirestore = "25.1.1"
 firebaseAuth = "23.1.0"
 squareupPicasso = "2.8"
+firebaseMessaging = "24.1.0"
 
 [libraries]
 browser = { module = "androidx.browser:browser", version.ref = "browser" }
@@ -27,6 +28,7 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 squareup-picasso = { module = "com.squareup.picasso:picasso", version.ref = "squareupPicasso" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

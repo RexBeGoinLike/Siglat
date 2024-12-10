@@ -6,14 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment_news"
-    android:layout_marginTop="500dp"
-    android:background="@color/white">
-
-
+    android:background="@color/white"
+    android:paddingTop="250dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -56,6 +54,7 @@
                     android:textColor="#B82727"
                     android:textSize="10sp"
                     tools:ignore="SmallSp" />
+
             </LinearLayout>
 
             <!-- Text Description -->
@@ -88,11 +87,8 @@
         <!-- WebView at the Bottom -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="175dp"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:layout_height="250dp"
+            app:cardCornerRadius="10dp">
 
             <WebView
                 android:id="@+id/newsView1"

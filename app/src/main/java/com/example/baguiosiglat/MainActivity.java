@@ -1,6 +1,7 @@
 package com.example.baguiosiglat;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +11,53 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Timer timer;
+    final private int interval = 3000;
+    private void startRepeatingTask() {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("posts").get().addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (DocumentSnapshot snapshot : queryDocumentSnapshots){
+                        SimpleDateFormat inputDate = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                        String input = snapshot.getString("date") + " " + snapshot.getString("time");
+                        try {
+                            Date dateOfPost = inputDate.parse(input);
+                            Date currentDate = new Date();
+                            if(currentDate.after(dateOfPost)){
+                                db.collection("posts").document(snapshot.getId()).delete();
+                            }
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                });
+            }
+        }, 0, interval);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         ;
         //Load default fragment
-        loadFragment(emergency);
-
+        loadFragment(news);
         //Bottom Navigation
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 
@@ -64,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        startRepeatingTask();
+
     }
 
 
@@ -86,5 +133,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+
 
 }
