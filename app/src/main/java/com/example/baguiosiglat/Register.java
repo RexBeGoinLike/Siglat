@@ -72,6 +72,7 @@ public class Register extends AppCompatActivity {
                 Map <String, String> userData = new HashMap<>();
                 userData.put("Name", name);
                 userData.put("Phone", phoneNumber);
+                userData.put("Email", email);
 
 
                 try {

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -22,7 +23,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -116,6 +119,26 @@ public class fragment_event_details extends Fragment {
         signUp.setOnClickListener(v -> {
             Map<String, String> uid = new HashMap<>();
             uid.put("UID", getArguments().getString("postID"));
+            // Define recipient, subject, and body
+            String[] recipients = new String[1];
+            db.collection("users").document(getArguments().getString("owner")).get().addOnSuccessListener(documentSnapshot -> {
+                recipients[0] = (documentSnapshot.getString("Email"));
+            });
+
+            String subject = "New volunteer";
+            String body = user.getDisplayName() + " has joined your event named " + getArguments().getString("title") + ".";
+
+            // Create an email intent
+            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+            emailIntent.setData(Uri.parse("mailto:"));
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, recipients);
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+            emailIntent.putExtra(Intent.EXTRA_TEXT, body);
+
+            if (emailIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivity(emailIntent);
+            }
+
             db.collection("users").document(user.getUid()).collection("joined_events")
                     .document(getArguments().getString("postID")).set(uid);
 
