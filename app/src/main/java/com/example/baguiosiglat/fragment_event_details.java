@@ -117,6 +117,13 @@ public class fragment_event_details extends Fragment {
             edit.setVisibility(View.VISIBLE);
         }
 
+        db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).get().addOnSuccessListener(documentSnapshot -> {
+           if(documentSnapshot.exists())
+               signUp.setText("Cancel");
+           else
+               signUp.setText("Sign up");
+        });
+
         if(getArguments() != null){
             eventHeader.setText(getArguments().getString("title"));
             eventLocation.setText(getArguments().getString("location"));
@@ -131,13 +138,19 @@ public class fragment_event_details extends Fragment {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).get().addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
-                        signUp.setText(R.string.cancel);
+                Map<String, Object> notification = new HashMap<>();
+                db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).get().addOnSuccessListener(documentSnapshot -> {
+                    if(documentSnapshot.exists()) {
                         db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).delete();
-                        getActivity().getSupportFragmentManager().popBackStack();
+                        notification.put("from", user.getDisplayName());
+                        notification.put("email", user.getEmail());
+                        Date currentDate = new Date();
+                        SimpleDateFormat inputDate = new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm", Locale.ENGLISH);
+                        notification.put("message", user.getDisplayName() + " has left your event titled " + getArguments().getString("title"));
+                        notification.put("dateSent", inputDate.format(currentDate));
+                        notification.put("notificationType", "1");
+                        notification.put("read", false);
                     }else{
-                        Map<String, Object> notification = new HashMap<>();
                         notification.put("from", user.getDisplayName());
                         notification.put("email", user.getEmail());
                         Date currentDate = new Date();
@@ -146,23 +159,17 @@ public class fragment_event_details extends Fragment {
                         notification.put("dateSent", inputDate.format(currentDate));
                         notification.put("notificationType", "1");
                         notification.put("read", false);
-
-                        db.collection("users").document(user.getUid()).get()
-                                .addOnSuccessListener(documentSnapshot -> {
-                                    if(documentSnapshot.exists())
-                                        notification.put("number", documentSnapshot.getString("Phone"));
-                                });
-
-                        db.collection("notifications").document(getArguments().getString("owner")).collection("userNotifications").add(notification);
+                        notification.put("number", documentSnapshot.getString("Phone"));
 
                         Map<String, String> uid = new HashMap<>();
                         uid.put("UID", getArguments().getString("postID"));
 
                         db.collection("users").document(user.getUid()).collection("joined_events")
                                 .document(getArguments().getString("postID")).set(uid);
-
-                        getActivity().getSupportFragmentManager().popBackStack();
                     }
+
+                    db.collection("notifications").document(getArguments().getString("owner")).collection("userNotifications").add(notification);
+                    getActivity().getSupportFragmentManager().popBackStack();
                 });
             }
         });
