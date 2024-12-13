@@ -128,11 +128,43 @@ public class fragment_event_details extends Fragment {
 
         //Onclick listeners
 
-        db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).get().addOnCompleteListener(task -> {
-            if(task.isSuccessful())
-                cancelButton();
-            else
-                joinButton();
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()) {
+                        signUp.setText(R.string.cancel);
+                        db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).delete();
+                        getActivity().getSupportFragmentManager().popBackStack();
+                    }else{
+                        Map<String, Object> notification = new HashMap<>();
+                        notification.put("from", user.getDisplayName());
+                        notification.put("email", user.getEmail());
+                        Date currentDate = new Date();
+                        SimpleDateFormat inputDate = new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm", Locale.ENGLISH);
+                        notification.put("message", user.getDisplayName() + " has joined your event titled " + getArguments().getString("title"));
+                        notification.put("dateSent", inputDate.format(currentDate));
+                        notification.put("notificationType", "1");
+                        notification.put("read", false);
+
+                        db.collection("users").document(user.getUid()).get()
+                                .addOnSuccessListener(documentSnapshot -> {
+                                    if(documentSnapshot.exists())
+                                        notification.put("number", documentSnapshot.getString("Phone"));
+                                });
+
+                        db.collection("notifications").document(getArguments().getString("owner")).collection("userNotifications").add(notification);
+
+                        Map<String, String> uid = new HashMap<>();
+                        uid.put("UID", getArguments().getString("postID"));
+
+                        db.collection("users").document(user.getUid()).collection("joined_events")
+                                .document(getArguments().getString("postID")).set(uid);
+
+                        getActivity().getSupportFragmentManager().popBackStack();
+                    }
+                });
+            }
         });
 
         //Edit the post
@@ -174,45 +206,5 @@ public class fragment_event_details extends Fragment {
 
 
         return view;
-    }
-
-
-
-    public void cancelButton(){
-        signUp.setText(R.string.cancel);
-        signUp.setOnClickListener(v -> {
-            db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).delete();
-            getActivity().getSupportFragmentManager().popBackStack();
-        });
-        joinButton();
-    }
-    public void joinButton(){
-        signUp.setOnClickListener(v -> {
-            Map<String, Object> notification = new HashMap<>();
-            notification.put("from", user.getDisplayName());
-            notification.put("email", user.getEmail());
-            Date currentDate = new Date();
-            SimpleDateFormat inputDate = new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm", Locale.ENGLISH);
-            notification.put("message", user.getDisplayName() + " has joined your event titled " + getArguments().getString("title"));
-            notification.put("dateSent", inputDate.format(currentDate));
-            notification.put("notificationType", "1");
-            notification.put("read", false);
-
-            db.collection("users").document(user.getUid()).get()
-                    .addOnSuccessListener(documentSnapshot -> {
-                        if(documentSnapshot.exists())
-                            notification.put("number", documentSnapshot.getString("Phone"));
-                    });
-
-            db.collection("notifications").document(getArguments().getString("owner")).collection("userNotifications").add(notification);
-
-            Map<String, String> uid = new HashMap<>();
-            uid.put("UID", getArguments().getString("postID"));
-
-            db.collection("users").document(user.getUid()).collection("joined_events")
-                    .document(getArguments().getString("postID")).set(uid);
-            getActivity().getSupportFragmentManager().popBackStack();
-            cancelButton();
-        });
     }
 }
