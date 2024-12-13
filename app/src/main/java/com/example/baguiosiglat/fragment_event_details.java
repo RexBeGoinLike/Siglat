@@ -1,12 +1,14 @@
 package com.example.baguiosiglat;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
@@ -19,14 +21,20 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,6 +83,10 @@ public class fragment_event_details extends Fragment {
         }
     }
 
+    private FirebaseFirestore db;
+    private AppCompatButton signUp;
+    private FirebaseUser user;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,11 +95,11 @@ public class fragment_event_details extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_details, container, false);
 
         TextView eventHeader, eventLocation, eventContact, eventDateTime, eventDescription;
-        AppCompatButton signUp;
+
         ImageButton delete, edit;
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         delete = view.findViewById(R.id.delete_btn);
         edit = view.findViewById(R.id.edit_post_btn);
@@ -100,7 +112,7 @@ public class fragment_event_details extends Fragment {
         signUp = view.findViewById(R.id.sign_up_event_btn);
 
         if (user.getUid().equals(getArguments().get("owner"))){
-            signUp.setVisibility(View.GONE);
+            signUp.setVisibility(View.VISIBLE);
             delete.setVisibility(View.VISIBLE);
             edit.setVisibility(View.VISIBLE);
         }
@@ -109,45 +121,21 @@ public class fragment_event_details extends Fragment {
             eventHeader.setText(getArguments().getString("title"));
             eventLocation.setText(getArguments().getString("location"));
             eventContact.setText(String.format("%s\n%s\n%s", getArguments().getString("contactName"), getArguments().getString("contactNumber"), getArguments().getString("contactEmail")));
-            eventDateTime.setText(String.format("%s | %s", getArguments().getString("date"), getArguments().get("time")));
+            eventDateTime.setText(String.format("on %s at %s", getArguments().getString("date"), getArguments().get("time")));
             eventDescription.setText(getArguments().getString("description"));
         }
 
 
         //Onclick listeners
 
-        signUp.setOnClickListener(v -> {
-            Map<String, String> uid = new HashMap<>();
-            uid.put("UID", getArguments().getString("postID"));
-            // Define recipient, subject, and body
-            String[] recipients = new String[1];
-            db.collection("users").document(getArguments().getString("owner")).get().addOnSuccessListener(documentSnapshot -> {
-                recipients[0] = (documentSnapshot.getString("Email"));
-            });
-
-            String subject = "New volunteer";
-            String body = user.getDisplayName() + " has joined your event named " + getArguments().getString("title") + ".";
-
-            // Create an email intent
-            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-            emailIntent.setData(Uri.parse("mailto:"));
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, recipients);
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-            emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-
-            if (emailIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                startActivity(emailIntent);
-            }
-
-            db.collection("users").document(user.getUid()).collection("joined_events")
-                    .document(getArguments().getString("postID")).set(uid);
-
-            getActivity().getSupportFragmentManager().popBackStack();
+        db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful())
+                cancelButton();
+            else
+                joinButton();
         });
 
-
         //Edit the post
-
         edit.setOnClickListener(v -> {
             Fragment fragment = new fragment_event_creator();
             fragment.setArguments(getArguments());
@@ -186,5 +174,45 @@ public class fragment_event_details extends Fragment {
 
 
         return view;
+    }
+
+
+
+    public void cancelButton(){
+        signUp.setText(R.string.cancel);
+        signUp.setOnClickListener(v -> {
+            db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).delete();
+            getActivity().getSupportFragmentManager().popBackStack();
+        });
+        joinButton();
+    }
+    public void joinButton(){
+        signUp.setOnClickListener(v -> {
+            Map<String, Object> notification = new HashMap<>();
+            notification.put("from", user.getDisplayName());
+            notification.put("email", user.getEmail());
+            Date currentDate = new Date();
+            SimpleDateFormat inputDate = new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm", Locale.ENGLISH);
+            notification.put("message", user.getDisplayName() + " has joined your event titled " + getArguments().getString("title"));
+            notification.put("dateSent", inputDate.format(currentDate));
+            notification.put("notificationType", "1");
+            notification.put("read", false);
+
+            db.collection("users").document(user.getUid()).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if(documentSnapshot.exists())
+                            notification.put("number", documentSnapshot.getString("Phone"));
+                    });
+
+            db.collection("notifications").document(getArguments().getString("owner")).collection("userNotifications").add(notification);
+
+            Map<String, String> uid = new HashMap<>();
+            uid.put("UID", getArguments().getString("postID"));
+
+            db.collection("users").document(user.getUid()).collection("joined_events")
+                    .document(getArguments().getString("postID")).set(uid);
+            getActivity().getSupportFragmentManager().popBackStack();
+            cancelButton();
+        });
     }
 }

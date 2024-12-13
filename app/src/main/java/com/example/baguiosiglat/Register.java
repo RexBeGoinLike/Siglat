@@ -73,6 +73,14 @@ public class Register extends AppCompatActivity {
                 userData.put("Name", name);
                 userData.put("Phone", phoneNumber);
                 userData.put("Email", email);
+                /*
+                Set permission level as 2
+                Permissions:
+                0 - Administrator
+                1 - Organization
+                2 - User
+                 */
+                userData.put("Permission Level", "2");
 
 
                 try {

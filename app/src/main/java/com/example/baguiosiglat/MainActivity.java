@@ -42,23 +42,6 @@ public class MainActivity extends AppCompatActivity {
                             Date currentDate = new Date();
                             if(currentDate.after(dateOfPost)){
 
-                                String[] recipients = new String[1];
-                                db.collection("users").document(snapshot.getString("owner")).get().addOnSuccessListener(documentSnapshot -> {
-                                    recipients[0] = (documentSnapshot.getString("Email"));
-                                });
-
-                                String subject = "Event Expired";
-                                String body = "Your event " + snapshot.getString("title") + " has expired.";
-
-                                // Create an email intent
-                                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                                emailIntent.setData(Uri.parse("mailto:"));
-                                emailIntent.putExtra(Intent.EXTRA_EMAIL, recipients);
-                                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-                                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
-
-                                if (emailIntent.resolveActivity(getPackageManager()) != null)
-                                    startActivity(emailIntent);
                                 db.collection("posts").document(snapshot.getId()).delete();
 
                             }
@@ -92,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Fragment news = new fragment_news();
+        Fragment notifications = new fragment_notifications();
         Fragment services = new fragment_services();
         Fragment volunteer = new fragment_volunteer();
         Fragment profile = new fragment_profile();
@@ -100,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         ;
         //Load default fragment
-        loadFragment(news);
+        loadFragment(emergency);
         //Bottom Navigation
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 
@@ -109,16 +92,16 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch (item.getItemId()){
                 case R.id.page_1:
-                    fragment = news;
+                    fragment = emergency;
                     break;
                 case R.id.page_2:
                     fragment = services;
                     break;
                 case R.id.page_3:
-                    fragment = emergency;
+                    fragment = volunteer;
                     break;
                 case R.id.page_4:
-                    fragment = volunteer;
+                    fragment = notifications;
                     break;
                 case R.id.page_5:
                     fragment = profile;

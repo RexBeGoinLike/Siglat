@@ -7,21 +7,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.firebase.Firebase;
+import com.example.baguiosiglat.referenceclasses.PostData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -81,6 +76,7 @@ public class fragment_profile extends Fragment {
         TextView name = view.findViewById(R.id.user_name);
         TextView number = view.findViewById(R.id.phone_number);
         TextView email = view.findViewById(R.id.email_address);
+        TextView permissionLevel = view.findViewById(R.id.user_perms_level);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -91,9 +87,21 @@ public class fragment_profile extends Fragment {
                 .addOnSuccessListener(documentSnapshot -> {
                     if(documentSnapshot.exists()){
                         number.setText(documentSnapshot.getString("Phone"));
+                        switch (documentSnapshot.getString("Permission Level")){
+                            case "1":
+                                permissionLevel.setText(R.string.organization);
+                                break;
+                            case "0":
+                                permissionLevel.setText(R.string.administrator);
+                                break;
+                            default:
+                                permissionLevel.setVisibility(View.GONE);
+                        }
                     }
                 });
 
+
+        //Owned posts manager
         ArrayList<PostData> posts = new ArrayList<>();
 
         //Filter through owned posts

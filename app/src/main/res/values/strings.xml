@@ -42,4 +42,12 @@
     <string name="fentnet">FentNet</string>
     <string name="organized_events">Organized Events</string>
     <string name="volunteered_events">Volunteered Events</string>
+    <string name="inbox">Inbox</string>
+    <string name="organization">Organization</string>
+    <string name="administrator">Administrator</string>
+    <string name="george_droid">George Droid</string>
+    <string name="droidgeorge_gmail_com">droidgeorge@gmail.com</string>
+    <string name="_090531959676">090531959676</string>
+    <string name="september_11_2001_at_9_11">September 11, 2001 at 9:11</string>
+    <string name="cancel">Cancel</string>
 </resources>

@@ -66,12 +66,22 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/event_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="name"
+                android:textColor="#707070"
+                android:textSize="11sp" />
+
+            <TextView
                 android:id="@+id/event_location_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/fentnet_research_plant"
-                android:textSize="16sp" />
+                android:textSize="11sp"
+                android:textColor="#707070"/>
 
 
             <TextView
@@ -80,19 +90,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/_05_20_2020_10_58"
-                android:textSize="14sp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="15dp" />
-
-            <TextView
-                android:id="@+id/event_contact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_bold"
-                android:text="name"
-                android:textSize="14sp" />
+                android:textSize="11sp"
+                android:textColor="#707070"/>
 
 
             <!-- Description -->

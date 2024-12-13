@@ -1,4 +1,4 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.referenceclasses;
 
 public class GovernmentDepartment {
     private String name;
