@@ -19,7 +19,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -86,6 +90,20 @@ public class fragment_notifications extends Fragment {
             for(DocumentSnapshot snapshot : queryDocumentSnapshots){
                 if(snapshot.exists()){
                     Notification notification = snapshot.toObject(Notification.class);
+
+                    notifications.sort(((o1, o2) -> {
+                        SimpleDateFormat inputDate = new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm");
+
+                        try {
+                            Date post1 = inputDate.parse(o1.getDateSent());
+                            Date post2 = inputDate.parse(o2.getDateSent());
+                            return post2.compareTo(post1);
+
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    }));
                     notifications.add(notification);
                     RecyclerView notifView = view.findViewById(R.id.notification_view);
                     NotificationsAdapter adapter = new NotificationsAdapter(notifications);

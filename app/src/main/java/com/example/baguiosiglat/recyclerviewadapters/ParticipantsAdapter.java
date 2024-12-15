@@ -17,7 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class ParticipantsAdapter extends RecyclerView.Adapter<ParticipantsAdapter.ViewWrapper>{
 
@@ -66,6 +71,29 @@ public class ParticipantsAdapter extends RecyclerView.Adapter<ParticipantsAdapte
             db.collection("posts").document(postArgs.getString("postID")).collection("participants").document(postArgs.getString("uid")).delete();
             db.collection("users").document(postArgs.getString("uid")).collection("joined_events").document(postArgs.getString("postID")).delete();
             notifyItemRemoved(position);
+
+
+            //Notify the deleted person
+            Map<String, Object> notification = new HashMap<>();
+            db.collection("users").document(postArgs.getString("uid")).collection("joined_events")
+                    .document(postArgs.getString("postID")).get().addOnSuccessListener(documentSnapshot -> {
+
+                        notification.put("from", user.getDisplayName());
+                        notification.put("email", user.getEmail());
+                        Date currentDate = new Date();
+                        SimpleDateFormat inputDate = new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm", Locale.ENGLISH);
+                        notification.put("message", user.getDisplayName() + " has removed you from the event " + postArgs.getString("title"));
+                        notification.put("dateSent", inputDate.format(currentDate));
+                        notification.put("notificationType", "1");
+                        notification.put("read", false);
+
+
+
+                        db.collection("notifications")
+                                .document(postArgs.getString("uid")).collection("userNotifications")
+                                .add(notification);
+
+                    });
         });
     }
 
