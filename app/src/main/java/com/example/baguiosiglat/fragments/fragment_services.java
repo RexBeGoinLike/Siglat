@@ -1,4 +1,4 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.fragments;
 
 import android.os.Bundle;
 
@@ -11,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.baguiosiglat.R;
+import com.example.baguiosiglat.recyclerviewadapters.ServicesAdapter;
 import com.example.baguiosiglat.referenceclasses.GovernmentDepartment;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -21,10 +21,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link fragment_notifications#newInstance} factory method to
+ * Use the {@link fragment_services#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_notifications extends Fragment {
+public class fragment_services extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +35,7 @@ public class fragment_notifications extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public fragment_notifications() {
+    public fragment_services() {
         // Required empty public constructor
     }
 
@@ -45,11 +45,11 @@ public class fragment_notifications extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_notifications.
+     * @return A new instance of fragment fragment_services.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_notifications newInstance(String param1, String param2) {
-        fragment_notifications fragment = new fragment_notifications();
+    public static fragment_services newInstance(String param1, String param2) {
+        fragment_services fragment = new fragment_services();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,31 +64,28 @@ public class fragment_notifications extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_notifications, container, false);
+        View view = inflater.inflate(R.layout.fragment_services, container, false);
 
 
-        ArrayList<Notification> notifications = new ArrayList<>();
+        ArrayList<GovernmentDepartment> services;services = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
-        db.collection("notifications").document(user.getUid()).collection("userNotifications").get().addOnSuccessListener(queryDocumentSnapshots -> {
+        //Populate array with the data for each government office
+        db.collection("services").get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentSnapshot snapshot : queryDocumentSnapshots){
                 if(snapshot.exists()){
-                    Notification notification = snapshot.toObject(Notification.class);
-                    notifications.add(notification);
-                    RecyclerView notifView = view.findViewById(R.id.notification_view);
-                    NotificationsAdapter adapter = new NotificationsAdapter(notifications);
-                    notifView.setAdapter(adapter);
-                   notifView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    GovernmentDepartment service = snapshot.toObject(GovernmentDepartment.class);
+                    services.add(service);
+                    RecyclerView servicesView = view.findViewById(R.id.services_view);
+                    ServicesAdapter adapter = new ServicesAdapter(getActivity(), services);
+                    servicesView.setAdapter(adapter);
+                    servicesView.setLayoutManager(new LinearLayoutManager(getContext()));
                 }
             }
         }).addOnFailureListener(e -> {

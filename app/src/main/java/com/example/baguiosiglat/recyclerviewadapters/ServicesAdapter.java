@@ -1,4 +1,4 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.recyclerviewadapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.baguiosiglat.R;
 import com.example.baguiosiglat.referenceclasses.GovernmentDepartment;
 import com.squareup.picasso.Picasso;
 

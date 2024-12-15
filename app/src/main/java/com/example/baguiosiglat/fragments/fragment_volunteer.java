@@ -1,4 +1,4 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.fragments;
 
 import android.os.Bundle;
 
@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.baguiosiglat.R;
+import com.example.baguiosiglat.recyclerviewadapters.VolunteerPreviewAdapter;
 import com.example.baguiosiglat.referenceclasses.PostData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

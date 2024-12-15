@@ -1,22 +1,20 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.referenceclasses;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.baguiosiglat.MainActivity;
+import com.example.baguiosiglat.R;
+import com.example.baguiosiglat.Register;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.*;
 
@@ -30,8 +28,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        setContentView(com.example.baguiosiglat.R.layout.activity_login);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(com.example.baguiosiglat.R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -39,9 +37,9 @@ public class Login extends AppCompatActivity {
 
         //Begin Code
 
-        emailField = findViewById(R.id.email_field);
-        passwordField = findViewById(R.id.password_field);
-        ImageButton loginButton = findViewById(R.id.login_btn);
+        emailField = findViewById(com.example.baguiosiglat.R.id.email_field);
+        passwordField = findViewById(com.example.baguiosiglat.R.id.password_field);
+        ImageButton loginButton = findViewById(com.example.baguiosiglat.R.id.login_btn);
         TextView registerBtn = findViewById(R.id.register_btn);
 
         registerBtn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Register.class)));

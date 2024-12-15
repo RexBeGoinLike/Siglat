@@ -1,9 +1,6 @@
 package com.example.baguiosiglat;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,12 +9,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.baguiosiglat.fragments.fragment_emergency;
+import com.example.baguiosiglat.fragments.fragment_notifications;
+import com.example.baguiosiglat.fragments.fragment_profile;
+import com.example.baguiosiglat.fragments.fragment_services;
+import com.example.baguiosiglat.fragments.fragment_volunteer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;

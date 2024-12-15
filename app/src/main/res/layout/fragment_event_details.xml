@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_event_details">
+    tools:context=".fragments.fragment_event_details">
 
 
     <ScrollView
@@ -95,17 +95,39 @@
 
 
             <!-- Description -->
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/sign_up_event_btn"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/volunteer_bg"
-                android:fontFamily="@font/inter_regular"
-                android:text="@string/sign_up"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="11sp" />
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/sign_up_event_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/volunteer_bg"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="Sign up"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/participants_view_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/volunteer_bg"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/view_participants"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

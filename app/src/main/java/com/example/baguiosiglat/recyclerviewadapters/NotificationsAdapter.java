@@ -1,4 +1,4 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.recyclerviewadapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.baguiosiglat.referenceclasses.Notification;
+import com.example.baguiosiglat.R;
 
 import java.util.ArrayList;
 

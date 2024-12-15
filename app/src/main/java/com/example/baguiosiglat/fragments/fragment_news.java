@@ -1,7 +1,6 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +11,8 @@ import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
+import com.example.baguiosiglat.R;
 
 public class fragment_news extends Fragment {
 

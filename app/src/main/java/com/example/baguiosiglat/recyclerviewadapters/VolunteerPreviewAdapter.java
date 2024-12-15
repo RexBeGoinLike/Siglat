@@ -1,4 +1,4 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.recyclerviewadapters;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.baguiosiglat.R;
+import com.example.baguiosiglat.fragments.fragment_event_details;
 import com.example.baguiosiglat.referenceclasses.PostData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

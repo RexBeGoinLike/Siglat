@@ -1,4 +1,4 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.referenceclasses;
 
 public class Notification {
     private String from;

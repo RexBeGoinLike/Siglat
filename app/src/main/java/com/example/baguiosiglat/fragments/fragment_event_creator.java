@@ -1,4 +1,4 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.fragments;
 
 import android.app.DatePickerDialog;
 import android.icu.util.Calendar;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.baguiosiglat.R;
 import com.example.baguiosiglat.referenceclasses.PostData;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;

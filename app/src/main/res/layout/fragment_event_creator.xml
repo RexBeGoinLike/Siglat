@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_event_creator">
+    tools:context=".fragments.fragment_event_creator">
 
     <ScrollView
         android:layout_width="match_parent"
