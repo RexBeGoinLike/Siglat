@@ -1,4 +1,4 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.fragments;
 
 import android.os.Bundle;
 
@@ -10,8 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
+import com.example.baguiosiglat.R;
+import com.example.baguiosiglat.referenceclasses.User;
 import com.example.baguiosiglat.recyclerviewadapters.ParticipantsAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -80,6 +81,7 @@ public class fragment_participants extends Fragment {
         ArrayList<User> participants = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        boolean show;
 
         db.collection("posts").document(getArguments().getString("postID")).collection("participants").get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(DocumentSnapshot snapshot : queryDocumentSnapshots){
@@ -94,17 +96,13 @@ public class fragment_participants extends Fragment {
                     Bundle bundle = getArguments();
                     bundle.putString("uid", participant.getUid());
                     adapter.setPostArgs(bundle);
-
-                    if(user.getUid().equals(getArguments().getString("owner"))){
-                        adapter.showButton(true);
-                    }
-
                 }
             }
 
         }).addOnFailureListener(e -> {
             Log.w("Error", "Document does not exist");
         });
+
 
         return view;
     }

@@ -1,4 +1,4 @@
-package com.example.baguiosiglat;
+package com.example.baguiosiglat.referenceclasses;
 
 import androidx.annotation.NonNull;
 

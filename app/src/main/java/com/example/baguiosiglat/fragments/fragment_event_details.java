@@ -14,8 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.baguiosiglat.R;
-import com.example.baguiosiglat.User;
-import com.example.baguiosiglat.fragment_participants;
+import com.example.baguiosiglat.referenceclasses.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,7 +24,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,11 +101,14 @@ public class fragment_event_details extends Fragment {
         signUp = view.findViewById(R.id.sign_up_event_btn);
         participantsView = view.findViewById(R.id.participants_view_btn);
 
-        if (user.getUid().equals(getArguments().get("owner"))){
-            signUp.setVisibility(View.VISIBLE);
-            delete.setVisibility(View.VISIBLE);
-            edit.setVisibility(View.VISIBLE);
-        }
+        db.collection("users").document(user.getUid()).get().addOnSuccessListener(documentSnapshot -> {
+            if (user.getUid().equals(getArguments().get("owner")) || documentSnapshot.getString("Permission Level").equals("0")){
+                signUp.setVisibility(View.GONE);
+                delete.setVisibility(View.VISIBLE);
+                edit.setVisibility(View.VISIBLE);
+            }
+        });
+
 
         db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).get().addOnSuccessListener(documentSnapshot -> {
            if(documentSnapshot.exists())
@@ -143,7 +144,6 @@ public class fragment_event_details extends Fragment {
         signUp.setOnClickListener(v -> {
             Map<String, Object> notification = new HashMap<>();
             db.collection("users").document(user.getUid()).collection("joined_events").document(getArguments().getString("postID")).get().addOnSuccessListener(documentSnapshot -> {
-
 
                 db.collection("users").document(user.getUid()).get().addOnSuccessListener(documentSnapshot1 -> {
                     notification.put("number", documentSnapshot1.getString("Phone"));

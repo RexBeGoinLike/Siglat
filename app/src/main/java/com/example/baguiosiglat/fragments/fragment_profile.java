@@ -80,12 +80,14 @@ public class fragment_profile extends Fragment {
         TextView number = view.findViewById(R.id.phone_number);
         TextView email = view.findViewById(R.id.email_address);
         TextView permissionLevel = view.findViewById(R.id.user_perms_level);
+        TextView uid = view.findViewById(R.id.uid);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         //Read data of user
         email.setText(user.getEmail());
         name.setText(user.getDisplayName());
+        uid.setText(user.getUid());
         db.collection("users").document(user.getUid()).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if(documentSnapshot.exists()){
